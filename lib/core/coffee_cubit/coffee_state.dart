@@ -8,6 +8,9 @@ final class CoffeeInitial extends CoffeeState {}
 final class CoffeeAddItem extends CoffeeState {}
 
 final class CoffeeRemoveItem extends CoffeeState {}
+
+final class CoffeeRemoveAllItem extends CoffeeState {}
+
 final class CurtSelectItem extends CoffeeState {}
 
 // count Request drinks

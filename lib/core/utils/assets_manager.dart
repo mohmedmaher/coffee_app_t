@@ -42,6 +42,7 @@ class ImageAssets {
   static const String starImage = "$imagePath/Star.svg";
   static const String dollarImage = "$imagePath/dollarImage.svg";
   static const String arrowLeft = "$imagePath/Arrow---Left-2.svg";
+  static const String arrowRight = "$imagePath/Arrow-Right.svg";
   static const String heartSmall = "$imagePath/HeartSmall.svg";
   static const String coffeeSvgRepo = "$imagePath/coffee-svgrepo-com.svg";
   static const String dropSvgRepo = "$imagePath/drop-svgrepo-com.svg";

@@ -90,9 +90,9 @@ class DrinkOrderSpecifications extends StatelessWidget {
                   children: [
                     const CustomSizeDrinkSelector(),
                     ChooseCountDrinks(
-                      cartItem: cartItem,
-                      increment: (item) => coffeeCubit.incrementItemQuantity(),
-                      decrement: (item) => coffeeCubit.decrementItemQuantity(),
+                        cartItem: cartItem,
+                        increment: (item) => coffeeCubit.incrementItemQuantity(item),
+                        decrement: (item) => coffeeCubit.decrementItemQuantity(item),
                     ),
                   ],
                 ),

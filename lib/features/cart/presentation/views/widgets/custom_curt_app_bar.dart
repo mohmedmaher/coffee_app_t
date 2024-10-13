@@ -1,14 +1,19 @@
+import 'package:coffee_app_t/core/coffee_cubit/coffee_cubit.dart';
 import 'package:coffee_app_t/core/utils/font_manager.dart';
 import 'package:coffee_app_t/core/utils/styles_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
+import '../../../../home/presentation/manager/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 
 class CustomCurtAppBar extends StatelessWidget {
-  const CustomCurtAppBar({super.key});
+  const CustomCurtAppBar({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +22,25 @@ class CustomCurtAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomContainerIcon(
-          onTap: () {},
+          onTap: () {
+            BlocProvider.of<BottomNavBarCubit>(context).updateIndex(0);
+          },
           imagePath: ImageAssets.lineArrowLeft,
           colorFilter: ColorFilter.mode(
             isColorDark ? ColorManager.white : ColorManager.black,
             BlendMode.srcIn,
           ),
         ),
-        Text('data',style: getBoldStyle(color:isColorDark ? ColorManager.white : ColorManager.black,fontSize: FontSize.s16),),
+        Text(
+          'data',
+          style: getBoldStyle(
+              color: isColorDark ? ColorManager.white : ColorManager.black,
+              fontSize: FontSize.s16),
+        ),
         CustomContainerIcon(
-          onTap: () {},
+          onTap: () {
+            BlocProvider.of<CoffeeCubit>(context).clearCart();
+          },
           imagePath: ImageAssets.deleteIcon,
         ),
       ],

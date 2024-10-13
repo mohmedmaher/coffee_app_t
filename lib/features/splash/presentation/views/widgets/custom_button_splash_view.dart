@@ -2,6 +2,9 @@ import 'package:coffee_app_t/core/utils/color_manager.dart';
 import 'package:coffee_app_t/core/utils/styles_manager.dart';
 import 'package:coffee_app_t/core/utils/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../../core/utils/assets_manager.dart';
 
 
 class CustomButtonSplashView extends StatelessWidget {
@@ -26,6 +29,9 @@ class CustomButtonSplashView extends StatelessWidget {
             Text(
               text,
               style:  getRegularStyle(color: ColorManager.white,fontSize: AppSize.s16),
+            ),
+            SvgPicture.asset(
+              ImageAssets.arrowRight,
             ),
           ],
         ),

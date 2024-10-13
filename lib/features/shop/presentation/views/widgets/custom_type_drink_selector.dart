@@ -24,7 +24,7 @@ class CustomTypeDrinkSelector extends StatelessWidget {
                   text: 'White Chocolate',
                   isSelected: coffeeCubit.selectedType == 'White Chocolate',
                   onTap: () {
-                    coffeeCubit.changeSelectedType(newSelected: 'White Chocolate');
+                    coffeeCubit.changeSelectedType(newType: 'White Chocolate');
                   },
                 ),
                 const SizedBox(width: 10),
@@ -32,7 +32,7 @@ class CustomTypeDrinkSelector extends StatelessWidget {
                   text: 'Milk Chocolate',
                   isSelected: coffeeCubit.selectedType == 'Milk Chocolate',
                   onTap: () {
-                    coffeeCubit.changeSelectedType(newSelected: 'Milk Chocolate');
+                    coffeeCubit.changeSelectedType(newType: 'Milk Chocolate');
                   },
                 ),
                 const SizedBox(width: 10),
@@ -40,7 +40,7 @@ class CustomTypeDrinkSelector extends StatelessWidget {
                   text: 'Dark Chocolate',
                   isSelected: coffeeCubit.selectedType == 'Dark Chocolate',
                   onTap: () {
-                    coffeeCubit.changeSelectedType(newSelected: 'Dark Chocolate');
+                    coffeeCubit.changeSelectedType(newType: 'Dark Chocolate');
                   },
                 ),
               ],

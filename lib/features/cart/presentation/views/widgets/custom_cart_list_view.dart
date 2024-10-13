@@ -17,13 +17,49 @@ class CustomCartListView extends StatelessWidget {
           child: ListView.builder(
             itemCount: coffeeCubit.userCurt.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppPadding.p7_5),
-                child: CustomCartListTile(
-                  coffeeCubit: coffeeCubit,
-                  index: index,
+              return Dismissible(
+                key: Key('${coffeeCubit.userCurt[index]}'),
+                direction: DismissDirection.endToStart,
+                onDismissed: (direction) {
+                  coffeeCubit.removeItemFromCart(coffeeCubit.userCurt[index]);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Item ${index + 1} deleted')),
+                  );
+                },
+                background: Container(
+                  color: Colors.red,
+                  alignment: Alignment.centerRight,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: AppPadding.p7_5),
+                  child: CustomCartListTile(
+                    coffeeCubit: coffeeCubit,
+                    index: index,
+                  ),
                 ),
               );
+
+              //   Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: AppPadding.p7_5),
+              //   child:
+              //   CustomCartListTile(
+              //     coffeeCubit: coffeeCubit,
+              //     index: index,
+              //   ),
+              //   // CustomShowSecondWidget(
+              //   //   coffeeCubit: coffeeCubit,
+              //   //   index: index,
+              //   //   onTap: () {
+              //   //     coffeeCubit.removeItemFromCart(coffeeCubit.userCurt[index]);
+              //   //   },
+              //   // ),
+              // );
             },
           ),
         );

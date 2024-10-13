@@ -19,7 +19,7 @@ class CustomSizeDrinkSelector extends StatelessWidget {
               text: 'S',
               isSelected: coffeeCubit.selectedSize == 'S',
               onTap: () {
-                coffeeCubit.changeSelectedSize(newSelected: 'S');
+                coffeeCubit.changeSelectedSize(newSize: 'S');
               },
             ),
             const SizedBox(width: 10),
@@ -27,7 +27,7 @@ class CustomSizeDrinkSelector extends StatelessWidget {
               text: 'M',
               isSelected: coffeeCubit.selectedSize == 'M',
               onTap: () {
-                coffeeCubit.changeSelectedSize(newSelected: 'M');
+                coffeeCubit.changeSelectedSize(newSize: 'M');
               },
             ),
             const SizedBox(width: 10),
@@ -35,7 +35,7 @@ class CustomSizeDrinkSelector extends StatelessWidget {
               text: 'L',
               isSelected: coffeeCubit.selectedSize == 'L',
               onTap: () {
-                coffeeCubit.changeSelectedSize(newSelected: 'L');
+                coffeeCubit.changeSelectedSize(newSize: 'L');
               },
             ),
           ],

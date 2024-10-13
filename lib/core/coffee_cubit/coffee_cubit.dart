@@ -20,8 +20,8 @@ class CoffeeCubit extends Cubit<CoffeeState> {
       numRate: 6.098,
     ),
     CoffeeModel(
-      title: 'Espresso',
-      price: 4.20,
+      title: 'EspressoDark',
+      price: 4.60,
       imagePath: ImageAssets.espressoDark,
       subTitle: 'with Milk',
       rate: 4.5,
@@ -73,16 +73,17 @@ class CoffeeCubit extends Cubit<CoffeeState> {
   // Add item to the user's cart
   void addItemToCart(CoffeeModel cartItem) {
     CoffeeModel newCartItem = CoffeeModel(
-        title: cartItem.title,
-        price: cartItem.price,
-        imagePath: cartItem.imagePath,
-        size: selectedSize,
-        type: selectedType,
-        quantity: quantity,
-        subTitle: cartItem.subTitle,
-        rate: cartItem.rate,
-        numRate: cartItem.numRate,
-        isSelected: selectedItem);
+      title: cartItem.title,
+      price: cartItem.price,
+      imagePath: cartItem.imagePath,
+      size: selectedSize,
+      type: selectedType,
+      quantity: cartItem.quantity,
+      subTitle: cartItem.subTitle,
+      rate: cartItem.rate,
+      numRate: cartItem.numRate,
+      isSelected: cartItem.isSelected,
+    );
 
     _userCart.add(newCartItem);
     calculateTotalPrice();
@@ -97,53 +98,64 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     emit(CoffeeRemoveItem());
   }
 
+    // Remove all item from the user's cart
+  void clearCart() {
+    userCurt.clear();
+    calculateTotalPrice();
+    emit(CoffeeRemoveAllItem());
+  }
+
+
   int quantity = 1;
 
-  // Increment item quantity in the cart
-  void incrementItemQuantity() {
-    if (quantity < 10) {
-      quantity += 1;
+  void incrementItemQuantity(CoffeeModel cartItem) {
+    if (cartItem.quantity < 10) {
+      cartItem.quantity += 1;
+      calculateTotalPrice();
       emit(CoffeeIncrementCountDrinks());
     }
   }
 
-  // Decrement item quantity in the cart
-  void decrementItemQuantity() {
-    if (quantity > 1) {
-      quantity -= 1;
+  void decrementItemQuantity(CoffeeModel cartItem) {
+    if (cartItem.quantity > 1) {
+      cartItem.quantity -= 1;
+      calculateTotalPrice();
       emit(CoffeeDecrementCountDrinks());
     }
   }
 
+
+
   // Change the size of the selected drink
   String selectedSize = 'M'; // Default size is Medium (M)
   String selectedType = 'White Chocolate'; // Default type is White Chocolate
-  bool selectedItem = true; // Default type is White Chocolate
 
-  void changeSelectedSize({required String newSelected}) {
-    selectedSize = newSelected;
+
+  void changeSelectedSize({required String newSize}) {
+    selectedSize = newSize;
     emit(CoffeeChangeSelectedSize());
   }
 
-  void changeSelectedType({required String newSelected}) {
-    selectedType = newSelected;
+  void changeSelectedType({required String newType}) {
+    selectedType = newType;
     emit(CoffeeChangeSelectedType());
   }
 
-  // selected item in curt
-  void selectedItemCart() {
-    selectedItem = !selectedItem;
+
+
+  void selectedItemCart(int index) {
+    _userCart[index].isSelected = !_userCart[index].isSelected;
     emit(CurtSelectItem());
   }
 
   // Refresh drink details
   void refreshDetails() {
     selectedSize = 'M';
-    selectedSize = 'White Chocolate';
-    quantity = 1;
-    selectedItem = true;
+    selectedType = 'White Chocolate';
+
     emit(CoffeeRefreshDetailsDrink());
   }
+
 
   // Calculate total price for items in the user's cart, considering size
   double totalPrice = 0.0;

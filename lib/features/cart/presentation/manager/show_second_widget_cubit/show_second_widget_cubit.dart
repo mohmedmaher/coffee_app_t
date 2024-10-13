@@ -15,17 +15,18 @@ class ShowSecondWidgetCubit extends Cubit<ShowSecondWidgetState> {
     _startDragX = details.localPosition.dx;
     return null;
   }
-  void Function(DragUpdateDetails)? onHorizontalDragUpdate (details) {
+  void onHorizontalDragUpdate(DragUpdateDetails details) {
     _endDragX = details.localPosition.dx;
     _velocity = (_endDragX - _startDragX) / details.primaryDelta!;
-    if (_velocity > 500) {
-        showSecondContainer = true;
-        emit(ShowSecondContainer());
-    } else if (_velocity < -500) {
-        showSecondContainer = false;
-        emit(ShowSecondContainer());
+
+    if (_velocity > 50) {
+      showSecondContainer = true;
+      emit(ShowSecondContainer());
+    } else if (_velocity < -50) {
+      showSecondContainer = false;
+      emit(ShowSecondContainer());
     }
-    return null;
   }
+
 
 }

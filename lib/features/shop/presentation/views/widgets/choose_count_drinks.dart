@@ -29,7 +29,6 @@ class ChooseCountDrinks extends StatelessWidget {
 
     return BlocBuilder<CoffeeCubit, CoffeeState>(
       builder: (context, state) {
-        var coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
         return Row(
           children: [
             CustomCounterIcon(
@@ -42,7 +41,7 @@ class ChooseCountDrinks extends StatelessWidget {
               width: AppSize.s16,
             ),
             Text(
-              '${coffeeCubit.quantity}',
+              '${cartItem.quantity}',
               style: getSemiBoldStyle(
                 color: isColorDark
                     ? ColorManager.white

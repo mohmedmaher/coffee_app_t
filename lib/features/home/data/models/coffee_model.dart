@@ -5,8 +5,7 @@ class CoffeeModel {
   final double numRate;
   final double price;
   final String imagePath;
-  final bool isSelected;
-
+  bool isSelected;
   String size;
   String type;
   int quantity;

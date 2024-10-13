@@ -4,7 +4,6 @@ import 'package:coffee_app_t/core/utils/font_manager.dart';
 import 'package:coffee_app_t/core/utils/styles_manager.dart';
 import 'package:coffee_app_t/core/utils/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/coffee_cubit/coffee_cubit.dart';
@@ -36,44 +35,39 @@ class CustomCartListTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          BlocBuilder<CoffeeCubit, CoffeeState>(
-            builder: (context, state) {
-              var coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
-              return GestureDetector(
-                onTap: () {
-                  coffeeCubit.selectedItemCart();
-                },
-                child: Container(
-                  height: AppSize.s20,
-                  width: AppSize.s20,
-                  decoration: coffeeCubit.selectedItem
-                      ? BoxDecoration(
-                          color: ColorManager.brownShade,
-                          borderRadius: BorderRadius.circular(AppSize.s12),
-                          border: Border.all(
-                            color: ColorManager.brownShade,
-                          ),
-                          image: DecorationImage(
-                            colorFilter: ColorFilter.mode(
-                                isColorDark
-                                    ? ColorManager.black
-                                    : ColorManager.white,
-                                BlendMode.srcIn),
-                            image: const AssetImage(
-                              ImageAssets.trueIcon,
-                            ),
-                          ),
-                        )
-                      : BoxDecoration(
-                          color: Colors.white70,
-                          borderRadius: BorderRadius.circular(AppSize.s12),
-                          border: Border.all(
-                            color: ColorManager.brownShade,
-                          ),
-                        ),
-                ),
-              );
+          GestureDetector(
+            onTap: () {
+              coffeeCubit.selectedItemCart(index);
             },
+            child: Container(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              decoration: cartItem.isSelected
+                  ? BoxDecoration(
+                      color: ColorManager.brownShade,
+                      borderRadius: BorderRadius.circular(AppSize.s12),
+                      border: Border.all(
+                        color: ColorManager.brownShade,
+                      ),
+                      image: DecorationImage(
+                        colorFilter: ColorFilter.mode(
+                            isColorDark
+                                ? ColorManager.black
+                                : ColorManager.white,
+                            BlendMode.srcIn),
+                        image: const AssetImage(
+                          ImageAssets.trueIcon,
+                        ),
+                      ),
+                    )
+                  : BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(AppSize.s12),
+                      border: Border.all(
+                        color: ColorManager.brownShade,
+                      ),
+                    ),
+            ),
           ),
           const SizedBox(
             width: AppSize.s10,
@@ -127,12 +121,28 @@ class CustomCartListTile extends StatelessWidget {
                   const SizedBox(
                     width: AppSize.s17,
                   ),
-                  ChooseCountDrinks(
+                  ChooseCountDrinksCart(
                     cartItem: cartItem,
-                    increment: (item) => coffeeCubit.incrementItemQuantity(),
-                    decrement: (item) => coffeeCubit.decrementItemQuantity(),
+                    increment: (item) =>
+                        coffeeCubit.incrementItemQuantity(item),
+                    decrement: (item) =>
+                        coffeeCubit.decrementItemQuantity(item),
                   ),
                 ],
+              ),
+              Text(
+                'Size: ${cartItem.size}',
+                style: getRegularStyle(
+                  color: isColorDark ? ColorManager.white : ColorManager.black,
+                  fontSize: FontSize.s12,
+                ),
+              ),
+              Text(
+                'Type: ${cartItem.type}',
+                style: getRegularStyle(
+                  color: isColorDark ? ColorManager.white : ColorManager.black,
+                  fontSize: FontSize.s12,
+                ),
               ),
             ],
           ),
@@ -142,12 +152,12 @@ class CustomCartListTile extends StatelessWidget {
   }
 }
 
-class ChooseCountDrinks extends StatelessWidget {
+class ChooseCountDrinksCart extends StatelessWidget {
   final CoffeeModel cartItem;
   final Function(CoffeeModel) increment;
   final Function(CoffeeModel) decrement;
 
-  const ChooseCountDrinks({
+  const ChooseCountDrinksCart({
     super.key,
     required this.cartItem,
     required this.increment,
@@ -159,47 +169,40 @@ class ChooseCountDrinks extends StatelessWidget {
   Widget build(BuildContext context) {
     final isColorDark = Theme.of(context).brightness == Brightness.dark;
 
-    return BlocBuilder<CoffeeCubit, CoffeeState>(
-      builder: (context, state) {
-        var coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
-        return Row(
-          children: [
-            CustomCounterIcon(
-              onTap: () {
-                decrement(cartItem);
-              },
-              imagePath: ImageAssets.minusIcon,
-            ),
-            const SizedBox(
-              width: AppSize.s7,
-            ),
-            Text(
-              '${coffeeCubit.quantity}',
-              style: getSemiBoldStyle(
-                color: isColorDark
-                    ? ColorManager.white
-                    : ColorManager.darkBlueGrey,
-                fontSize: FontSize.s14,
-              ),
-            ),
-            const SizedBox(
-              width: AppSize.s7,
-            ),
-            CustomCounterIcon(
-              onTap: () {
-                increment(cartItem);
-              },
-              imagePath: ImageAssets.plusIcon,
-            ),
-          ],
-        );
-      },
+    return Row(
+      children: [
+        CustomCounterIconCart(
+          onTap: () {
+            decrement(cartItem);
+          },
+          imagePath: ImageAssets.minusIcon,
+        ),
+        const SizedBox(
+          width: AppSize.s7,
+        ),
+        Text(
+          '${cartItem.quantity}',
+          style: getSemiBoldStyle(
+            color: isColorDark ? ColorManager.white : ColorManager.darkBlueGrey,
+            fontSize: FontSize.s14,
+          ),
+        ),
+        const SizedBox(
+          width: AppSize.s7,
+        ),
+        CustomCounterIconCart(
+          onTap: () {
+            increment(cartItem);
+          },
+          imagePath: ImageAssets.plusIcon,
+        ),
+      ],
     );
   }
 }
 
-class CustomCounterIcon extends StatelessWidget {
-  const CustomCounterIcon(
+class CustomCounterIconCart extends StatelessWidget {
+  const CustomCounterIconCart(
       {super.key, required this.onTap, required this.imagePath});
 
   final void Function() onTap;
