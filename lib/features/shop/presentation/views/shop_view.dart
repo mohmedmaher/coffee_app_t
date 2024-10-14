@@ -57,7 +57,7 @@ class ShopView extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s25,
                 ),
-                const CustomTopList(),
+                const CustomDrinksClassificationList(),
                 const SizedBox(
                   height: AppSize.s25,
                 ),
