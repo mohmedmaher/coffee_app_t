@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../manager/selected_item_cubit/selected_item_cubit.dart';
 
-class CustomTopList extends StatelessWidget {
-  const CustomTopList({super.key});
+class CustomDrinksClassificationList extends StatelessWidget {
+  const CustomDrinksClassificationList({super.key});
 
   final List<String> drinks = const [
     AppStrings.espresso,
