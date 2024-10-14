@@ -14,7 +14,7 @@ class CustomCoffeeListTile extends StatelessWidget {
     required this.coffeeCubit,
     required this.index,
     this.onPressed,
-    required this.iconData,
+    required this.iconData, required coffeeModel,
   });
 
   final CoffeeCubit coffeeCubit;

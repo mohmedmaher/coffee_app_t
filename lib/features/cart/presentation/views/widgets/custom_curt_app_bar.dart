@@ -23,7 +23,7 @@ class CustomCurtAppBar extends StatelessWidget {
       children: [
         CustomContainerIcon(
           onTap: () {
-            BlocProvider.of<BottomNavBarCubit>(context).updateIndex(0);
+            context.read<BottomNavBarCubit>().updateIndex(0);
           },
           imagePath: ImageAssets.lineArrowLeft,
           colorFilter: ColorFilter.mode(
@@ -39,7 +39,7 @@ class CustomCurtAppBar extends StatelessWidget {
         ),
         CustomContainerIcon(
           onTap: () {
-            BlocProvider.of<CoffeeCubit>(context).clearCart();
+            context.read<CoffeeCubit>().clearCart(); // استخدام context.read
           },
           imagePath: ImageAssets.deleteIcon,
         ),

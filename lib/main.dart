@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ThemeCubit(),
-        )
+        ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (context, theme) {

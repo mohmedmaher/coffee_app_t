@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import '../../features/home/presentation/manager/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
+import '../../manager/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
@@ -38,28 +38,28 @@ class CustomBottomNavBar extends StatelessWidget {
                   currentIndex == 0
                       ? ImageAssets.homeNavB
                       : ImageAssets.homeNavL,
-                  width: 24,
-                  height: 24,
-                ),
-              ),
-              GButton(
-                icon: Icons.shopping_bag,
-                text: '',
-                leading: SvgPicture.asset(
-                  currentIndex == 1 ? ImageAssets.bagNavB : ImageAssets.bagNavL,
-                  width: 24,
-                  height: 24,
+                  width: AppSize.s24,
+                  height: AppSize.s24,
                 ),
               ),
               GButton(
                 icon: Icons.favorite,
                 text: '',
                 leading: SvgPicture.asset(
-                  currentIndex == 2
+                  currentIndex == 1
                       ? ImageAssets.heartNavB
                       : ImageAssets.heartNavL,
-                  width: 22,
-                  height: 22,
+                  width: AppSize.s22,
+                  height: AppSize.s22,
+                ),
+              ),
+              GButton(
+                icon: Icons.shopping_bag,
+                text: '',
+                leading: SvgPicture.asset(
+                  currentIndex == 2 ? ImageAssets.bagNavB : ImageAssets.bagNavL,
+                  width: AppSize.s24,
+                  height: AppSize.s24,
                 ),
               ),
               GButton(
@@ -69,8 +69,8 @@ class CustomBottomNavBar extends StatelessWidget {
                   currentIndex == 3
                       ? ImageAssets.notificationNavB
                       : ImageAssets.notificationNavL,
-                  width: 24,
-                  height: 24,
+                  width: AppSize.s24,
+                  height: AppSize.s24,
                 ),
               ),
               GButton(
@@ -80,8 +80,8 @@ class CustomBottomNavBar extends StatelessWidget {
                   currentIndex == 4
                       ? ImageAssets.profileNavLB
                       : ImageAssets.profileNavL,
-                  width: 24,
-                  height: 24,
+                  width: AppSize.s24,
+                  height: AppSize.s24,
                 ),
               ),
             ],

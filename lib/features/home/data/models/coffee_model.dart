@@ -22,4 +22,9 @@ class CoffeeModel {
     this.quantity = 1,
     this.isSelected = true,
   });
+
+  @override
+  String toString() {
+    return 'CoffeeModel{title: $title, price: $price, rate: $rate}';
+  }
 }

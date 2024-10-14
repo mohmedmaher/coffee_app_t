@@ -62,8 +62,8 @@ class SearchWidget extends StatelessWidget {
                 cursorColor: isColorDark
                     ? ColorManager.darkBlueGrey
                     : ColorManager.blackOpacity1,
-                onFieldSubmitted: (value) {
-                  context.read<SearchCubit>().search(value);
+                onChanged: (query) {
+                  context.read<SearchCubit>().search(query);
                 },
               ),
             ),

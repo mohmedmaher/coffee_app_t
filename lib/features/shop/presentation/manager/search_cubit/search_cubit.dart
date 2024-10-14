@@ -1,15 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../home/data/models/coffee_model.dart';
 
-class SearchCubit extends Cubit<List<String>> {
-  List<String> previousSearches = [];
+class SearchCubit extends Cubit<List<CoffeeModel>> {
+  final List<CoffeeModel> coffeeShop;
 
-  SearchCubit() : super([]);
+  SearchCubit(this.coffeeShop) : super([]);
 
   void search(String query) {
-    if (!previousSearches.contains(query)) {
-      previousSearches.add(query);
+    print('Search query: $query');
+    if (query.isEmpty) {
+      emit([]);
+      return;
     }
-    emit(List.generate(10, (index) => '$query Result $index'));
+    final searchResults = coffeeShop.where((coffee) {
+      return coffee.title.toLowerCase().contains(query.toLowerCase());
+    }).toList();
+    print('Search results: $searchResults');
+    emit(searchResults);
   }
 
   void clearSearch() {
