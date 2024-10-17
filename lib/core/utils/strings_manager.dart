@@ -48,5 +48,4 @@ class AppStrings {
   static const name = 'Mohammed Maher';
   static const notification = 'Notification';
 
-
 }
