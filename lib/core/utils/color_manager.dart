@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ColorManager {
   // Error color
   static Color error = const Color(0xffe61f34); // Red color
+  static Color red = const Color(0xffe61f34); // Red color
   // Custom colors light
   static Color brownShade = const Color(0xff967259);
   static Color lightBeige = const Color(0xffECE0D1);

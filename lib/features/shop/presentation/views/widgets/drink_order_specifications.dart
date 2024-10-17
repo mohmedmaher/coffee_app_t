@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/coffee_cubit/coffee_cubit.dart';
 import '../../../../../core/utils/font_manager.dart';
 import '../../../../../core/widgets/custom_show_snack_bar.dart';
+import '../../../../home/data/models/coffee_model.dart';
 import 'choose_count_drinks.dart';
 import 'custom_description_widget.dart';
 import 'custom_size_drink_selector.dart';
@@ -24,9 +25,8 @@ class DrinkOrderSpecifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isColorDark = Theme.of(context).brightness == Brightness.dark;
-    final int index = GoRouterState.of(context).extra as int;
+    final coffeeModel = GoRouterState.of(context).extra as CoffeeModel;
     final coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
-    final cartItem = coffeeCubit.coffeeShop[index];
 
     return Scaffold(
       body: SafeArea(
@@ -41,8 +41,7 @@ class DrinkOrderSpecifications extends StatelessWidget {
                   'Description',
                   style: getBoldStyle(
                     fontSize: AppSize.s15,
-                    color:
-                        isColorDark ? ColorManager.white : ColorManager.black,
+                    color: isColorDark ? ColorManager.white : ColorManager.black,
                   ),
                 ),
               ),
@@ -55,8 +54,7 @@ class DrinkOrderSpecifications extends StatelessWidget {
                   'Choice of Chocolate',
                   style: getBoldStyle(
                     fontSize: AppSize.s15,
-                    color:
-                        isColorDark ? ColorManager.white : ColorManager.black,
+                    color: isColorDark ? ColorManager.white : ColorManager.black,
                   ),
                 ),
               ),
@@ -64,20 +62,17 @@ class DrinkOrderSpecifications extends StatelessWidget {
               const CustomTypeDrinkSelector(),
               const SizedBox(height: AppSize.s20),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: AppPadding.p23, right: AppPadding.p56),
+                padding: const EdgeInsets.only(left: AppPadding.p23, right: AppPadding.p56),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Size',
-                      style: getBoldStyle(
-                          color: ColorManager.black, fontSize: FontSize.s15),
+                      style: getBoldStyle(color: ColorManager.black, fontSize: FontSize.s15),
                     ),
                     Text(
                       'Quantity',
-                      style: getBoldStyle(
-                          color: ColorManager.black, fontSize: FontSize.s15),
+                      style: getBoldStyle(color: ColorManager.black, fontSize: FontSize.s15),
                     ),
                   ],
                 ),
@@ -90,16 +85,15 @@ class DrinkOrderSpecifications extends StatelessWidget {
                   children: [
                     const CustomSizeDrinkSelector(),
                     ChooseCountDrinks(
-                        cartItem: cartItem,
-                        increment: (item) => coffeeCubit.incrementItemQuantity(item),
-                        decrement: (item) => coffeeCubit.decrementItemQuantity(item),
+                      cartItem: coffeeModel, // استخدام coffeeModel هنا
+                      increment: (item) => coffeeCubit.incrementItemQuantity(item),
+                      decrement: (item) => coffeeCubit.decrementItemQuantity(item),
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p23, vertical: AppPadding.p20),
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p23, vertical: AppPadding.p20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -108,14 +102,11 @@ class DrinkOrderSpecifications extends StatelessWidget {
                         Text(
                           'Price',
                           style: getRegularStyle(
-                              color: isColorDark
-                                  ? ColorManager.lightGrey2
-                                  : ColorManager.lightGrey,
-                              fontSize: FontSize.s14),
+                            color: isColorDark ? ColorManager.lightGrey2 : ColorManager.lightGrey,
+                            fontSize: FontSize.s14,
+                          ),
                         ),
-                        const SizedBox(
-                          height: AppSize.s5,
-                        ),
+                        const SizedBox(height: AppSize.s5),
                         Row(
                           children: [
                             SvgPicture.asset(
@@ -123,15 +114,11 @@ class DrinkOrderSpecifications extends StatelessWidget {
                               height: AppSize.s22,
                               width: AppSize.s16,
                             ),
-                            const SizedBox(
-                              width: AppSize.s5,
-                            ),
+                            const SizedBox(width: AppSize.s5),
                             Text(
-                              '${coffeeCubit.coffeeShop[index].price}',
+                              '${coffeeModel.price}',
                               style: getBoldStyle(
-                                color: isColorDark
-                                    ? ColorManager.white
-                                    : ColorManager.black,
+                                color: isColorDark ? ColorManager.white : ColorManager.black,
                                 fontSize: AppSize.s24,
                               ),
                             ),
@@ -142,9 +129,8 @@ class DrinkOrderSpecifications extends StatelessWidget {
                     CustomButton(
                       text: AppStrings.buyNow,
                       onTap: () {
-                        coffeeCubit.addItemToCart(cartItem);
-                        CustomShowSnackBar.show(
-                            context, 'Successfully added to cart');
+                        coffeeCubit.addItemToCart(coffeeModel);
+                        CustomShowSnackBar.show(context, 'Successfully added to cart');
                         Navigator.pop(context);
                       },
                     ),

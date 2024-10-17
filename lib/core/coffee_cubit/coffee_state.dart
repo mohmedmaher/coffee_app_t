@@ -5,11 +5,12 @@ sealed class CoffeeState {}
 
 final class CoffeeInitial extends CoffeeState {}
 
-final class CoffeeAddItem extends CoffeeState {}
+final class CoffeeAddItemToCart extends CoffeeState {}
 
-final class CoffeeRemoveItem extends CoffeeState {}
 
-final class CoffeeRemoveAllItem extends CoffeeState {}
+final class CoffeeDeleteFromCurt extends CoffeeState {}
+
+final class CoffeeClearCurt extends CoffeeState {}
 
 final class CurtSelectItem extends CoffeeState {}
 
@@ -33,3 +34,9 @@ final class CoffeeRefreshDetailsDrink extends CoffeeState {}
 // calculate total sale
 
 final class CoffeeCalculateTotalSale extends CoffeeState {}
+
+// Favorite section
+final class CoffeeAddItemToFavorite extends CoffeeState {}
+
+final class CoffeeDeleteFromFavorite extends CoffeeState {}
+final class CoffeeClearFavorite extends CoffeeState {}

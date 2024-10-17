@@ -12,57 +12,59 @@ class CoffeeCubit extends Cubit<CoffeeState> {
   // Coffee shop list (available drinks)
   final List<CoffeeModel> _shop = [
     CoffeeModel(
-      title: 'Espresso',
+      title: 'Espresso1',
       price: 4.20,
       imagePath: ImageAssets.espressoPro,
       subTitle: 'with Oa t Milk',
-      rate: 4.5,
-      numRate: 6.098,
+      rate: 3.5,
+      numRate: 3.098,
     ),
     CoffeeModel(
       title: 'EspressoDark',
       price: 4.60,
       imagePath: ImageAssets.espressoDark,
       subTitle: 'with Milk',
-      rate: 4.5,
-      numRate: 6.098,
+      rate: 2.5,
+      numRate: 1.098,
     ),
     CoffeeModel(
       title: 'latte',
       price: 15.0,
       imagePath: ImageAssets.latte,
       subTitle: '',
-      rate: 4.5,
-      numRate: 6.098,
+      rate: 4.3,
+      numRate: 5.098,
     ),
     CoffeeModel(
       title: 'iced latte',
       price: 20.0,
       imagePath: ImageAssets.icedLatte,
       subTitle: '',
-      rate: 4.5,
-      numRate: 6.098,
+      rate: 4.9,
+      numRate: 9.098,
     ),
     CoffeeModel(
       title: 'espresso',
       price: 30.0,
       imagePath: ImageAssets.espressoPro,
       subTitle: '',
-      rate: 4.5,
-      numRate: 6.098,
+      rate: 5.0,
+      numRate: 9.998,
     ),
     CoffeeModel(
       title: 'orange coffee',
       price: 40.0,
       imagePath: ImageAssets.orangeCoffee,
       subTitle: '',
-      rate: 4.5,
-      numRate: 6.098,
+      rate: 3.7,
+      numRate: 4.098,
     ),
   ];
 
   // User's cart (items selected by the user)
   final List<CoffeeModel> _userCart = [];
+
+  // User's cart (items selected by the user)
 
   // Getter for coffee shop list (returns the available drinks)
   List<CoffeeModel> get coffeeShop => _shop;
@@ -70,6 +72,40 @@ class CoffeeCubit extends Cubit<CoffeeState> {
   // Getter for user's cart (returns items added to cart)
   List<CoffeeModel> get userCurt => _userCart;
 
+  // favorite section
+  final List<CoffeeModel> _userFavorite = [];
+
+  List<CoffeeModel> get userFavorite => _userFavorite;
+
+  // Add item to the user's Favorite
+  void addItemToFavorite(CoffeeModel cartItem) {
+    if (!_userFavorite.contains(cartItem)) {
+      _userFavorite.add(cartItem);
+      print('add Item to favorites');
+      emit(CoffeeAddItemToFavorite());
+    } else {
+      print('Item already in favorites');
+    }
+  }
+
+  bool isFavorite(CoffeeModel coffeeItem) {
+    print(coffeeItem);
+    return _userFavorite.contains(coffeeItem);
+  }
+
+  void removeItemFromFavorite(CoffeeModel cartItem) {
+    _userFavorite.remove(cartItem);
+    emit(CoffeeDeleteFromFavorite());
+  }
+
+
+  // Remove all item from the user's cart
+  void clearFavorite() {
+    userFavorite.clear();
+    emit(CoffeeClearFavorite());
+  }
+
+  // cart section
   // Add item to the user's cart
   void addItemToCart(CoffeeModel cartItem) {
     CoffeeModel newCartItem = CoffeeModel(
@@ -88,23 +124,22 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     _userCart.add(newCartItem);
     calculateTotalPrice();
     refreshDetails();
-    emit(CoffeeAddItem());
+    emit(CoffeeAddItemToCart());
   }
 
   // Remove item from the user's cart
   void removeItemFromCart(CoffeeModel cartItem) {
     _userCart.remove(cartItem);
     calculateTotalPrice();
-    emit(CoffeeRemoveItem());
+    emit(CoffeeDeleteFromCurt());
   }
 
-    // Remove all item from the user's cart
+  // Remove all item from the user's cart
   void clearCart() {
     userCurt.clear();
     calculateTotalPrice();
-    emit(CoffeeRemoveAllItem());
+    emit(CoffeeClearCurt());
   }
-
 
   int quantity = 1;
 
@@ -124,12 +159,9 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     }
   }
 
-
-
   // Change the size of the selected drink
   String selectedSize = 'M'; // Default size is Medium (M)
   String selectedType = 'White Chocolate'; // Default type is White Chocolate
-
 
   void changeSelectedSize({required String newSize}) {
     selectedSize = newSize;
@@ -140,8 +172,6 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     selectedType = newType;
     emit(CoffeeChangeSelectedType());
   }
-
-
 
   void selectedItemCart(int index) {
     _userCart[index].isSelected = !_userCart[index].isSelected;
@@ -155,7 +185,6 @@ class CoffeeCubit extends Cubit<CoffeeState> {
 
     emit(CoffeeRefreshDetailsDrink());
   }
-
 
   // Calculate total price for items in the user's cart, considering size
   double totalPrice = 0.0;

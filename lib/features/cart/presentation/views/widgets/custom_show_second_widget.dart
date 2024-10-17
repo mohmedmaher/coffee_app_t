@@ -1,3 +1,4 @@
+import 'package:coffee_app_t/features/cart/presentation/views/widgets/custom_cart_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +8,6 @@ import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
 import '../../manager/show_second_widget_cubit/show_second_widget_cubit.dart';
-import 'custom_cart_list_tile.dart';
 
 class CustomShowSecondWidget extends StatelessWidget {
   const CustomShowSecondWidget({
@@ -30,18 +30,18 @@ class CustomShowSecondWidget extends StatelessWidget {
             BlocProvider.of<ShowSecondWidgetCubit>(context);
         return GestureDetector(
           onHorizontalDragStart: showSecondWidgetCubit.onHorizontalDragStart,
-          onHorizontalDragUpdate:
-              showSecondWidgetCubit.onHorizontalDragUpdate,
+          onHorizontalDragUpdate: showSecondWidgetCubit.onHorizontalDragUpdate,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: AppPadding.p8),
             child: Stack(
               children: [
                 Transform.translate(
                   offset: Offset(
-                      showSecondWidgetCubit.showSecondContainer
-                          ? -screenWidth / 5
-                          : 0,
-                      0),
+                    showSecondWidgetCubit.showSecondContainer
+                        ? -screenWidth / 5
+                        : 0,
+                    0,
+                  ),
                   child: CustomCartListTile(
                     coffeeCubit: coffeeCubit,
                     index: index,

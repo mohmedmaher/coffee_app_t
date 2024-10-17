@@ -1,3 +1,4 @@
+import 'package:coffee_app_t/features/favorite/presentation/views/widgets/favorite_view_body.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteView extends StatelessWidget {
@@ -5,8 +6,6 @@ class FavoriteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [Text('data')],
-    );
+    return const FavoriteViewBody();
   }
 }

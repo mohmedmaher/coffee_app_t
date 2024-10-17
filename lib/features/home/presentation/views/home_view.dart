@@ -17,15 +17,17 @@ class HomeView extends StatelessWidget {
     return BlocBuilder<BottomNavBarCubit, int>(
       builder: (context, currentIndex) {
         return Scaffold(
-          body: IndexedStack(
-            index: currentIndex,
-            children: const [
-              ShopView(),
-              CartView(),
-              FavoriteView(),
-              NotificationView(),
-              ProfileView(),
-            ],
+          body: SafeArea(
+            child: IndexedStack(
+              index: currentIndex,
+              children: const [
+                ShopView(),
+                FavoriteView(),
+                CartView(),
+                NotificationView(),
+                ProfileView(),
+              ],
+            ),
           ),
           bottomNavigationBar: const CustomBottomNavBar(),
         );

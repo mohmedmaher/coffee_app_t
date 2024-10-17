@@ -1,37 +1,31 @@
+import 'package:coffee_app_t/features/shop/presentation/views/widgets/custom_coffee_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/coffee_cubit/coffee_cubit.dart';
 import '../../../../../core/utils/app_router.dart';
-import '../../../../home/data/models/coffee_model.dart';
-import '../../manager/search_cubit/search_cubit.dart';
-import 'custom_coffee_list_tile.dart';
 
-class CustomCoffeeListView extends StatelessWidget {
-  const CustomCoffeeListView({super.key});
+class CustomFavoriteListView extends StatelessWidget {
+  const CustomFavoriteListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchCubit, List<CoffeeModel>>(
-      builder: (context, searchResults) {
-        var coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
-        final coffeeList =
-            searchResults.isEmpty ? coffeeCubit.coffeeShop : searchResults;
-
-        return SizedBox(
-          height: 226,
-          child: GridView.builder(
-            scrollDirection: Axis.horizontal,
+    var coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
+    return Expanded(
+      child: BlocBuilder<CoffeeCubit, CoffeeState>(
+        builder: (context, state) {
+          return GridView.builder(
+            scrollDirection: Axis.vertical,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
-              childAspectRatio: 1.4,
+              crossAxisCount: 2,
+              childAspectRatio: 0.67,
               crossAxisSpacing: 9,
               mainAxisSpacing: 9,
             ),
-            itemCount: coffeeList.length,
+            itemCount: coffeeCubit.userFavorite.length,
             itemBuilder: (BuildContext context, int index) {
-              final coffeeModel = coffeeList[index];
+              final coffeeModel = coffeeCubit.userFavorite[index];
               return CustomCoffeeListTile(
                 coffeeCubit: coffeeCubit,
                 coffeeModel: coffeeModel,
@@ -41,11 +35,12 @@ class CustomCoffeeListView extends StatelessWidget {
                     extra: coffeeModel,
                   );
                 },
+
               );
             },
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

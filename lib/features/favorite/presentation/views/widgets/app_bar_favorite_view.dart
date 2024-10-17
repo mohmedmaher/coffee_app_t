@@ -1,20 +1,18 @@
-import 'package:coffee_app_t/core/coffee_cubit/coffee_cubit.dart';
-import 'package:coffee_app_t/core/utils/font_manager.dart';
-import 'package:coffee_app_t/core/utils/strings_manager.dart';
-import 'package:coffee_app_t/core/utils/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../../core/coffee_cubit/coffee_cubit.dart';
 import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/font_manager.dart';
+import '../../../../../core/utils/strings_manager.dart';
+import '../../../../../core/utils/styles_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
 import '../../../../home/presentation/manager/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 
-class CustomCurtAppBar extends StatelessWidget {
-  const CustomCurtAppBar({
-    super.key,
-  });
+class AppBarFavoriteView extends StatelessWidget {
+  const AppBarFavoriteView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +31,14 @@ class CustomCurtAppBar extends StatelessWidget {
           ),
         ),
         Text(
-          AppStrings.cart,
+          AppStrings.favorite,
           style: getBoldStyle(
-              color: isColorDark ? ColorManager.white : ColorManager.darkBlueGrey,
+              color: isColorDark ? ColorManager.white : ColorManager.black,
               fontSize: FontSize.s16),
         ),
         CustomContainerIcon(
           onTap: () {
-            context.read<CoffeeCubit>().clearCart();
+            context.read<CoffeeCubit>().clearFavorite();
           },
           imagePath: ImageAssets.deleteIcon,
         ),

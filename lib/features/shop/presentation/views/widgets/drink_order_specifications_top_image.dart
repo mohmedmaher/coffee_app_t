@@ -9,6 +9,7 @@ import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/font_manager.dart';
 import '../../../../../core/utils/styles_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
+import '../../../../home/data/models/coffee_model.dart';
 import 'drink_order_specifications.dart';
 
 class DrinkOrderSpecificationsTopImage extends StatelessWidget {
@@ -17,9 +18,9 @@ class DrinkOrderSpecificationsTopImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isColorDark = Theme.of(context).brightness == Brightness.dark;
-    final int index = GoRouterState.of(context).extra as int;
+    final CoffeeModel coffeeModel =
+        GoRouterState.of(context).extra as CoffeeModel;
     final coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
-    final cartItem = coffeeCubit.coffeeShop[index];
 
     return Padding(
       padding: const EdgeInsets.all(AppPadding.p13),
@@ -34,7 +35,7 @@ class DrinkOrderSpecificationsTopImage extends StatelessWidget {
                   width: double.infinity,
                   height: AppSize.s360,
                   fit: BoxFit.fill,
-                  image: AssetImage(cartItem.imagePath),
+                  image: AssetImage(coffeeModel.imagePath),
                 ),
               ],
             ),
@@ -57,12 +58,25 @@ class DrinkOrderSpecificationsTopImage extends StatelessWidget {
                       isColorDark ? ColorManager.white : ColorManager.black,
                 ),
                 const Spacer(),
-                CustomContainerIcon(
-                  imagePath: ImageAssets.heartSmall,
-                  onTap: () {},
-                  bgColor: isColorDark
-                      ? ColorManager.darkBlueGrey
-                      : ColorManager.white,
+                BlocBuilder<CoffeeCubit, CoffeeState>(
+                  builder: (context, state) {
+                    final isFavorite = coffeeCubit.isFavorite(coffeeModel);
+                    return CustomContainerIcon(
+                      imagePath: ImageAssets.heartSmall,
+                      imageColor:
+                          isFavorite ? ColorManager.red : ColorManager.grey,
+                      onTap: () {
+                        if (isFavorite) {
+                          coffeeCubit.removeItemFromFavorite(coffeeModel);
+                        } else {
+                          coffeeCubit.addItemToFavorite(coffeeModel);
+                        }
+                      },
+                      bgColor: isColorDark
+                          ? ColorManager.darkBlueGrey
+                          : ColorManager.white,
+                    );
+                  },
                 ),
               ],
             ),
@@ -114,7 +128,7 @@ class DrinkOrderSpecificationsTopImage extends StatelessWidget {
                               width: AppSize.s5,
                             ),
                             Text(
-                              '${coffeeCubit.coffeeShop[index].rate}',
+                              '${coffeeModel.rate}',
                               style: getSemiBoldStyle(
                                 color: ColorManager.white,
                                 fontSize: AppSize.s12,
@@ -124,7 +138,7 @@ class DrinkOrderSpecificationsTopImage extends StatelessWidget {
                               width: AppSize.s5,
                             ),
                             Text(
-                              '( ${coffeeCubit.coffeeShop[index].numRate})',
+                              '( ${coffeeModel.numRate})',
                               style: getRegularStyle(
                                 color: ColorManager.whiteOpacity,
                                 fontSize: AppSize.s10,

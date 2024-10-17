@@ -23,124 +23,122 @@ class ShopView extends StatelessWidget {
         .brightness == Brightness.dark;
     return BlocProvider(
       create: (context) => SearchCubit(BlocProvider.of<CoffeeCubit>(context).coffeeShop),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: AppPadding.p23,
-            right: AppPadding.p23,
-            top: AppPadding.p12,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CustomCoffeeAppBar(),
-                const SizedBox(
-                  height: AppSize.s30,
-                ),
-                RichText(
-                  text: TextSpan(
-                    style: getSemiBoldStyle(
-                      color: isColorDark ? ColorManager.white : ColorManager
-                          .grey,
-                    ),
-                    children: const [
-                      TextSpan(text: '${AppStrings.findBest}\n'),
-                      TextSpan(text: AppStrings.coffeeTaste),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: AppSize.s25,
-                ),
-                SearchWidget(),
-                const SizedBox(
-                  height: AppSize.s25,
-                ),
-                const CustomDrinksClassificationList(),
-                const SizedBox(
-                  height: AppSize.s25,
-                ),
-                const CustomCoffeeListView(),
-                const SizedBox(
-                  height: AppSize.s25,
-                ),
-                Text(
-                  AppStrings.specialForYou,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: AppPadding.p23,
+          right: AppPadding.p23,
+          top: AppPadding.p12,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomCoffeeAppBar(),
+              const SizedBox(
+                height: AppSize.s30,
+              ),
+              RichText(
+                text: TextSpan(
                   style: getSemiBoldStyle(
-                    color: isColorDark ? ColorManager.white : ColorManager.grey,
+                    color: isColorDark ? ColorManager.white : ColorManager
+                        .grey,
+                  ),
+                  children: const [
+                    TextSpan(text: '${AppStrings.findBest}\n'),
+                    TextSpan(text: AppStrings.coffeeTaste),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: AppSize.s25,
+              ),
+              SearchWidget(),
+              const SizedBox(
+                height: AppSize.s25,
+              ),
+              const CustomDrinksClassificationList(),
+              const SizedBox(
+                height: AppSize.s25,
+              ),
+              const CustomCoffeeListView(),
+              const SizedBox(
+                height: AppSize.s25,
+              ),
+              Text(
+                AppStrings.specialForYou,
+                style: getSemiBoldStyle(
+                  color: isColorDark ? ColorManager.white : ColorManager.grey,
+                ),
+              ),
+              const SizedBox(
+                height: AppSize.s25,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppPadding.p8,
+                  horizontal: AppPadding.p10,
+                ),
+                height: AppSize.s145,
+                decoration: BoxDecoration(
+                  color: ColorManager.brownShade,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSize.s25),
                   ),
                 ),
-                const SizedBox(
-                  height: AppSize.s25,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppPadding.p8,
-                    horizontal: AppPadding.p10,
-                  ),
-                  height: AppSize.s145,
-                  decoration: BoxDecoration(
-                    color: ColorManager.brownShade,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(AppSize.s25),
+                child: Row(
+                  children: [
+                    const Image(
+                      image: AssetImage(ImageAssets.drinkForYou),
+                      width: AppSize.s130,
+                      height: AppSize.s130,
                     ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Image(
-                        image: AssetImage(ImageAssets.drinkForYou),
-                        width: AppSize.s130,
-                        height: AppSize.s130,
-                      ),
-                      const SizedBox(
-                        width: AppPadding.p14,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: AppSize.s149,
-                            child: Text(
-                              AppStrings.speciallyMixed,
-                              style: getSemiBoldStyle(
-                                color: ColorManager.white,
-                                fontSize: AppSize.s14,
+                    const SizedBox(
+                      width: AppPadding.p14,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: AppSize.s149,
+                          child: Text(
+                            AppStrings.speciallyMixed,
+                            style: getSemiBoldStyle(
+                              color: ColorManager.white,
+                              fontSize: AppSize.s14,
+                            ),
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$11.00 ',
+                                style: getSemiBoldStyle(
+                                    color: ColorManager.white,
+                                    fontSize: AppSize.s14),
                               ),
-                            ),
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: '\$11.00 ',
-                                  style: getSemiBoldStyle(
-                                      color: ColorManager.white,
-                                      fontSize: AppSize.s14),
+                              TextSpan(
+                                text: '\$20.3',
+                                style: getSemiBoldStyleDecoration(
+                                  color: ColorManager.greyOpacityLight,
+                                  fontSize: AppSize.s14,
+                                  decoration: TextDecoration
+                                      .lineThrough,
                                 ),
-                                TextSpan(
-                                  text: '\$20.3',
-                                  style: getSemiBoldStyleDecoration(
-                                    color: ColorManager.greyOpacityLight,
-                                    fontSize: AppSize.s14,
-                                    decoration: TextDecoration
-                                        .lineThrough,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-                const SizedBox(
-                  height: AppSize.s25,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: AppSize.s25,
+              ),
+            ],
           ),
         ),
       ),

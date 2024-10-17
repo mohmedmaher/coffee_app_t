@@ -15,40 +15,38 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isColorDark = Theme.of(context).brightness == Brightness.dark;
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: BlocBuilder<CoffeeCubit, CoffeeState>(
-          builder: (context, state) {
-            var coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: AppSize.s28,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: BlocBuilder<CoffeeCubit, CoffeeState>(
+        builder: (context, state) {
+          var coffeeCubit = BlocProvider.of<CoffeeCubit>(context);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: AppSize.s28,
+              ),
+               const CustomCurtAppBar(),
+              const SizedBox(
+                height: AppSize.s10,
+              ),
+              Text(
+                'Items (${coffeeCubit.userCurt.length})',
+                style: getSemiBoldStyle(
+                  color:
+                      isColorDark ? ColorManager.white : ColorManager.black,
+                  fontSize: FontSize.s16,
                 ),
-                 const CustomCurtAppBar(),
-                const SizedBox(
-                  height: AppSize.s10,
-                ),
-                Text(
-                  'Items (${coffeeCubit.userCurt.length})',
-                  style: getSemiBoldStyle(
-                    color:
-                        isColorDark ? ColorManager.white : ColorManager.black,
-                    fontSize: FontSize.s16,
-                  ),
-                ),
-                const CustomCartListView(),
-                // BlocProvider(
-                //   create: (context) => ShowSecondWidgetCubit(),
-                //   child: const CustomCartListView(),
-                // ),
-                // CustomButton(text: 'Pay Now'),
-              ],
-            );
-          },
-        ),
+              ),
+              const CustomCartListView(),
+              // BlocProvider(
+              //   create: (context) => ShowSecondWidgetCubit(),
+              //   child: const CustomCartListView(),
+              // ),
+              // CustomButton(text: 'Pay Now'),
+            ],
+          );
+        },
       ),
     );
   }

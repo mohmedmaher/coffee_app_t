@@ -130,20 +130,6 @@ class CustomCartListTile extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(
-                'Size: ${cartItem.size}',
-                style: getRegularStyle(
-                  color: isColorDark ? ColorManager.white : ColorManager.black,
-                  fontSize: FontSize.s12,
-                ),
-              ),
-              Text(
-                'Type: ${cartItem.type}',
-                style: getRegularStyle(
-                  color: isColorDark ? ColorManager.white : ColorManager.black,
-                  fontSize: FontSize.s12,
-                ),
-              ),
             ],
           ),
         ],

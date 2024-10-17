@@ -1,8 +1,8 @@
-
 import 'package:coffee_app_t/core/utils/assets_manager.dart';
 import 'package:coffee_app_t/core/utils/color_manager.dart';
 import 'package:coffee_app_t/core/utils/styles_manager.dart';
 import 'package:coffee_app_t/core/utils/values_manager.dart';
+import 'package:coffee_app_t/features/home/data/models/coffee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,23 +12,20 @@ class CustomCoffeeListTile extends StatelessWidget {
   const CustomCoffeeListTile({
     super.key,
     required this.coffeeCubit,
-    required this.index,
     this.onPressed,
-    required this.iconData, required coffeeModel,
+    required this.coffeeModel,
   });
 
   final CoffeeCubit coffeeCubit;
-  final int index;
+  final CoffeeModel coffeeModel;
   final void Function()? onPressed;
-  final IconData iconData;
 
   @override
   Widget build(BuildContext context) {
     final isColorDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
-
       decoration: BoxDecoration(
-        color: ColorManager.white,
+        color: isColorDark ? ColorManager.darkBlueGrey : ColorManager.white,
         borderRadius: BorderRadius.circular(AppSize.s25),
       ),
       padding: const EdgeInsets.only(
@@ -44,7 +41,7 @@ class CustomCoffeeListTile extends StatelessWidget {
               children: [
                 Image(
                   image: AssetImage(
-                    coffeeCubit.coffeeShop[index].imagePath,
+                    coffeeModel.imagePath,
                   ),
                   width: double.infinity,
                   height: AppSize.s123,
@@ -77,7 +74,7 @@ class CustomCoffeeListTile extends StatelessWidget {
                           width: AppSize.s5,
                         ),
                         Text(
-                          '${coffeeCubit.coffeeShop[index].rate}',
+                          '${coffeeModel.rate}',
                           style: getSemiBoldStyle(
                             color: ColorManager.white,
                             fontSize: AppSize.s12,
@@ -94,7 +91,7 @@ class CustomCoffeeListTile extends StatelessWidget {
             height: AppSize.s15,
           ),
           Text(
-            coffeeCubit.coffeeShop[index].title,
+            coffeeModel.title,
             style: getMediumStyle(
               color: isColorDark ? ColorManager.white : ColorManager.black,
               fontSize: AppSize.s16,
@@ -110,7 +107,7 @@ class CustomCoffeeListTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    coffeeCubit.coffeeShop[index].subTitle,
+                    coffeeModel.subTitle,
                     style: getRegularStyle(
                       color: isColorDark
                           ? ColorManager.greyWithOpacity
@@ -125,7 +122,7 @@ class CustomCoffeeListTile extends StatelessWidget {
                     children: [
                       SvgPicture.asset(ImageAssets.dollarImage),
                       Text(
-                        '${coffeeCubit.coffeeShop[index].price}',
+                        '${coffeeModel.price}',
                         style: getSemiBoldStyle(
                           color: isColorDark
                               ? ColorManager.white
