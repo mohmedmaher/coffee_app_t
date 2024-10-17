@@ -51,4 +51,5 @@ class ImageAssets {
   static const String deleteIcon = "$imagePath/Delete.svg";
   static const String deleteIconWhite = "$imagePath/DeleteWhite.svg";
   static const String lineArrowLeft = "$imagePath/Line-Arrow-Left.svg";
+  static const String setting = "$imagePath/Setting.svg";
 }

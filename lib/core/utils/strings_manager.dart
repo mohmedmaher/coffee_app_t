@@ -41,4 +41,12 @@ class AppStrings {
   static const cappuccinoWithOatMilk = "Cappuccino with oat milk";
   static const espressoWithOatMilk = "Espresso with oat milk";
   static const latteWithOatMilk = "Latte with oat milk";
+  static const favorite = 'Favorite';
+  static const profile = 'Profile';
+  static const all = 'All';
+  static const noItems = 'No items available for this category';
+  static const name = 'Mohammed Maher';
+  static const notification = 'Notification';
+
+
 }

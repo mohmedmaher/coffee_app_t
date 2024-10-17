@@ -62,17 +62,17 @@ class DrinkOrderSpecifications extends StatelessWidget {
               const CustomTypeDrinkSelector(),
               const SizedBox(height: AppSize.s20),
               Padding(
-                padding: const EdgeInsets.only(left: AppPadding.p23, right: AppPadding.p56),
+                padding: const EdgeInsets.only(left: AppPadding.p23, right: AppPadding.p56,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Size',
-                      style: getBoldStyle(color: ColorManager.black, fontSize: FontSize.s15),
+                      style: getBoldStyle(color: isColorDark ? ColorManager.white : ColorManager.black, fontSize: FontSize.s15,),
                     ),
                     Text(
                       'Quantity',
-                      style: getBoldStyle(color: ColorManager.black, fontSize: FontSize.s15),
+                      style: getBoldStyle(color: isColorDark ? ColorManager.white : ColorManager.black, fontSize: FontSize.s15,),
                     ),
                   ],
                 ),
@@ -132,6 +132,7 @@ class DrinkOrderSpecifications extends StatelessWidget {
                         coffeeCubit.addItemToCart(coffeeModel);
                         CustomShowSnackBar.show(context, 'Successfully added to cart');
                         Navigator.pop(context);
+                        FocusScope.of(context).unfocus();
                       },
                     ),
                   ],

@@ -12,12 +12,13 @@ class CoffeeCubit extends Cubit<CoffeeState> {
   // Coffee shop list (available drinks)
   final List<CoffeeModel> _shop = [
     CoffeeModel(
-      title: 'Espresso1',
+      title: 'Espresso Pro',
       price: 4.20,
       imagePath: ImageAssets.espressoPro,
       subTitle: 'with Oa t Milk',
       rate: 3.5,
       numRate: 3.098,
+      classification: 'Espresso',
     ),
     CoffeeModel(
       title: 'EspressoDark',
@@ -26,6 +27,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
       subTitle: 'with Milk',
       rate: 2.5,
       numRate: 1.098,
+      classification: 'Espresso',
     ),
     CoffeeModel(
       title: 'latte',
@@ -34,6 +36,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
       subTitle: '',
       rate: 4.3,
       numRate: 5.098,
+      classification: 'Latte',
     ),
     CoffeeModel(
       title: 'iced latte',
@@ -42,6 +45,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
       subTitle: '',
       rate: 4.9,
       numRate: 9.098,
+      classification: 'Latte',
     ),
     CoffeeModel(
       title: 'espresso',
@@ -50,6 +54,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
       subTitle: '',
       rate: 5.0,
       numRate: 9.998,
+      classification: 'Espresso',
     ),
     CoffeeModel(
       title: 'orange coffee',
@@ -58,6 +63,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
       subTitle: '',
       rate: 3.7,
       numRate: 4.098,
+      classification: 'Cappuccino',
     ),
   ];
 
@@ -81,15 +87,11 @@ class CoffeeCubit extends Cubit<CoffeeState> {
   void addItemToFavorite(CoffeeModel cartItem) {
     if (!_userFavorite.contains(cartItem)) {
       _userFavorite.add(cartItem);
-      print('add Item to favorites');
       emit(CoffeeAddItemToFavorite());
-    } else {
-      print('Item already in favorites');
     }
   }
 
   bool isFavorite(CoffeeModel coffeeItem) {
-    print(coffeeItem);
     return _userFavorite.contains(coffeeItem);
   }
 
@@ -97,7 +99,6 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     _userFavorite.remove(cartItem);
     emit(CoffeeDeleteFromFavorite());
   }
-
 
   // Remove all item from the user's cart
   void clearFavorite() {
@@ -119,6 +120,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
       rate: cartItem.rate,
       numRate: cartItem.numRate,
       isSelected: cartItem.isSelected,
+      classification: cartItem.classification,
     );
 
     _userCart.add(newCartItem);

@@ -1,3 +1,4 @@
+import 'package:coffee_app_t/features/profile/presentation/views/widgets/profile_view_body.dart';
 import 'package:flutter/material.dart';
 
 class ProfileView extends StatelessWidget {
@@ -5,8 +6,6 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [Text('data')],
-    );
+    return const ProfileViewBody();
   }
 }

@@ -2,6 +2,7 @@ import 'package:coffee_app_t/core/utils/assets_manager.dart';
 import 'package:coffee_app_t/core/utils/color_manager.dart';
 import 'package:coffee_app_t/core/utils/strings_manager.dart';
 import 'package:coffee_app_t/core/utils/styles_manager.dart';
+import 'package:coffee_app_t/features/shop/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:coffee_app_t/features/shop/presentation/views/widgets/custom_coffee_list_view.dart';
 import 'package:coffee_app_t/features/shop/presentation/views/widgets/custom_drinks_classification_list.dart';
 import 'package:coffee_app_t/features/shop/presentation/views/widgets/search_widget.dart';
@@ -11,37 +12,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/coffee_cubit/coffee_cubit.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/custom_coffee_app_bar.dart';
-import '../manager/search_cubit/search_cubit.dart';
+import '../../../home/data/models/coffee_model.dart';
+import '../manager/selected_item_cubit/filtered_shop _cubit.dart';
 
 class ShopView extends StatelessWidget {
   const ShopView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isColorDark = Theme
-        .of(context)
-        .brightness == Brightness.dark;
-    return BlocProvider(
-      create: (context) => SearchCubit(BlocProvider.of<CoffeeCubit>(context).coffeeShop),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppPadding.p23,
-          right: AppPadding.p23,
-          top: AppPadding.p12,
-        ),
+    final isColorDark = Theme.of(context).brightness == Brightness.dark;
+    final coffeeShop = BlocProvider.of<CoffeeCubit>(context).coffeeShop;
+
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: AppPadding.p23,
+        right: AppPadding.p23,
+        top: AppPadding.p12,
+      ),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => FilteredShopCubit(coffeeShop),
+          ),
+          BlocProvider(
+            create: (context) => SearchCubit(coffeeShop),
+          ),
+        ],
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomCoffeeAppBar(),
-              const SizedBox(
-                height: AppSize.s30,
-              ),
+              const SizedBox(height: AppSize.s30),
               RichText(
                 text: TextSpan(
                   style: getSemiBoldStyle(
-                    color: isColorDark ? ColorManager.white : ColorManager
-                        .grey,
+                    color: isColorDark ? ColorManager.white : ColorManager.grey,
                   ),
                   children: const [
                     TextSpan(text: '${AppStrings.findBest}\n'),
@@ -49,30 +55,38 @@ class ShopView extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: AppSize.s25,
-              ),
+              const SizedBox(height: AppSize.s25),
               SearchWidget(),
-              const SizedBox(
-                height: AppSize.s25,
-              ),
+              const SizedBox(height: AppSize.s25),
               const CustomDrinksClassificationList(),
-              const SizedBox(
-                height: AppSize.s25,
+              const SizedBox(height: AppSize.s25),
+              // Displaying the CustomCoffeeListView with the filtered data
+              BlocBuilder<FilteredShopCubit, List<CoffeeModel>>(
+                builder: (context, filteredCoffeeList) {
+                  if (filteredCoffeeList.isEmpty) {
+                    return Center(
+                      child: Text(
+                        AppStrings.noItems,
+                        style: getSemiBoldStyle(
+                          color: isColorDark ? ColorManager.white : ColorManager.grey,
+                          fontSize: AppSize.s16,
+                        ),
+                      ),
+                    );
+                  } else {
+                    return CustomCoffeeListView(coffeeList: filteredCoffeeList);
+                  }
+                },
               ),
-              const CustomCoffeeListView(),
-              const SizedBox(
-                height: AppSize.s25,
-              ),
+
+              const SizedBox(height: AppSize.s25),
               Text(
                 AppStrings.specialForYou,
                 style: getSemiBoldStyle(
                   color: isColorDark ? ColorManager.white : ColorManager.grey,
                 ),
               ),
-              const SizedBox(
-                height: AppSize.s25,
-              ),
+              const SizedBox(height: AppSize.s25),
               Container(
                 padding: const EdgeInsets.symmetric(
                   vertical: AppPadding.p8,
@@ -92,9 +106,7 @@ class ShopView extends StatelessWidget {
                       width: AppSize.s130,
                       height: AppSize.s130,
                     ),
-                    const SizedBox(
-                      width: AppPadding.p14,
-                    ),
+                    const SizedBox(width: AppPadding.p14),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,21 +135,18 @@ class ShopView extends StatelessWidget {
                                 style: getSemiBoldStyleDecoration(
                                   color: ColorManager.greyOpacityLight,
                                   fontSize: AppSize.s14,
-                                  decoration: TextDecoration
-                                      .lineThrough,
+                                  decoration: TextDecoration.lineThrough,
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: AppSize.s25,
-              ),
+              const SizedBox(height: AppSize.s25),
             ],
           ),
         ),

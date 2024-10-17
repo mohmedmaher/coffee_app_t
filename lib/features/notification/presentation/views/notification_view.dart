@@ -1,22 +1,24 @@
+import 'package:coffee_app_t/core/utils/font_manager.dart';
+import 'package:coffee_app_t/core/utils/strings_manager.dart';
+import 'package:coffee_app_t/core/utils/styles_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../home/presentation/manager/theme/theme_cubit.dart';
+import '../../../../core/utils/color_manager.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isColorDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('data'),
-        IconButton(
-          icon: const Icon(Icons.brightness_6),
-          onPressed: () {
-            context.read<ThemeCubit>().toggleTheme();
-          },
+        Text(
+          AppStrings.notification,
+          style: getSemiBoldStyle(
+            color: isColorDark ? ColorManager.white : ColorManager.black,
+            fontSize: FontSize.s22,
+          ),
         ),
       ],
     );

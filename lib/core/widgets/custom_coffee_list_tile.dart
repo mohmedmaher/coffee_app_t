@@ -6,7 +6,7 @@ import 'package:coffee_app_t/features/home/data/models/coffee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../core/coffee_cubit/coffee_cubit.dart';
+import '../coffee_cubit/coffee_cubit.dart';
 
 class CustomCoffeeListTile extends StatelessWidget {
   const CustomCoffeeListTile({

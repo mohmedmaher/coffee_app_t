@@ -50,6 +50,7 @@ class DrinkOrderSpecificationsTopImage extends StatelessWidget {
                   imagePath: ImageAssets.arrowLeft,
                   onTap: () {
                     Navigator.pop(context);
+                    FocusScope.of(context).unfocus();
                   },
                   bgColor: isColorDark
                       ? ColorManager.darkBlueGrey
