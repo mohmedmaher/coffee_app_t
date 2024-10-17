@@ -7,7 +7,7 @@ import '../../features/shop/presentation/views/widgets/drink_order_specification
 import '../../features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
-  static const kSplashView= '/';
+  static const kSplashView = '/';
   static const kHomeView = '/homeView';
   static const kShopView = '/shopView';
   static const kCartView = '/cartView';
