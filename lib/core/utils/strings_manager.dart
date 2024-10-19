@@ -47,5 +47,6 @@ class AppStrings {
   static const noItems = 'No items available for this category';
   static const name = 'Mohammed Maher';
   static const notification = 'Notification';
+  static const successfullyAddedToCart = 'Successfully added to cart';
 
 }

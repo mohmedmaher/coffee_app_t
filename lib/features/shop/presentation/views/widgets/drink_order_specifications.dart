@@ -38,7 +38,7 @@ class DrinkOrderSpecifications extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 23.0),
                 child: Text(
-                  'Description',
+                  AppStrings.description,
                   style: getBoldStyle(
                     fontSize: AppSize.s15,
                     color: isColorDark ? ColorManager.white : ColorManager.black,
@@ -51,7 +51,7 @@ class DrinkOrderSpecifications extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p23),
                 child: Text(
-                  'Choice of Chocolate',
+                  AppStrings.choiceOfChocolate,
                   style: getBoldStyle(
                     fontSize: AppSize.s15,
                     color: isColorDark ? ColorManager.white : ColorManager.black,
@@ -67,11 +67,11 @@ class DrinkOrderSpecifications extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Size',
+                      AppStrings.size,
                       style: getBoldStyle(color: isColorDark ? ColorManager.white : ColorManager.black, fontSize: FontSize.s15,),
                     ),
                     Text(
-                      'Quantity',
+                      AppStrings.quantity,
                       style: getBoldStyle(color: isColorDark ? ColorManager.white : ColorManager.black, fontSize: FontSize.s15,),
                     ),
                   ],
@@ -100,7 +100,7 @@ class DrinkOrderSpecifications extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'Price',
+                          AppStrings.price,
                           style: getRegularStyle(
                             color: isColorDark ? ColorManager.lightGrey2 : ColorManager.lightGrey,
                             fontSize: FontSize.s14,
@@ -130,7 +130,7 @@ class DrinkOrderSpecifications extends StatelessWidget {
                       text: AppStrings.buyNow,
                       onTap: () {
                         coffeeCubit.addItemToCart(coffeeModel);
-                        CustomShowSnackBar.show(context, 'Successfully added to cart');
+                        CustomShowSnackBar.show(context, AppStrings.successfullyAddedToCart);
                         Navigator.pop(context);
                         FocusScope.of(context).unfocus();
                       },
