@@ -1,4 +1,4 @@
-# coffee_app_t
+# Coffee Shope App
 
 # Created a coffee shop app for users to explore a variety of coffee items, customize orders, and add items to their cart.
 ### Tools
