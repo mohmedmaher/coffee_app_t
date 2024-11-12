@@ -4,7 +4,6 @@
 ### Tools
 - Architecture: MVVM
 - State Management: Bloc
-- API Integration: Dio
 
 ### Add some screenshots
 
